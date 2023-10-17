@@ -5,25 +5,30 @@ import Card from './Card'
 
 export default function Search() {
     const navigate = useNavigate()
-    const [dataBook, setDataBook] = useState()
+    const [dataBook, setDataBook] = useState([])
     const [dataAll, setDataAll] = useState()
+    const [dataSearch, setDataSearch] = useState()
 
     const handleSearch = (dataSearch) => {
-        search(dataSearch).then(data => {
-            let arr = []
-            if (data.length > 0) {
-                data.map(itemSearch => {
-                    let book = dataAll.find(a => a.id === itemSearch.id)
-                    if (book) {
-                        arr.push(book)
-                    } else {
-                        arr.push(itemSearch)
-                    }
-                })
-                setDataBook(arr)
-            }
-
-        })
+        setDataSearch(dataSearch)
+        if (dataSearch) {
+            search(dataSearch).then(data => {
+                let arr = []
+                if (data?.length > 0) {
+                    data.map(itemSearch => {
+                        let book = dataAll.find(a => a.id === itemSearch.id)
+                        if (book) {
+                            arr.push(book)
+                        } else {
+                            arr.push(itemSearch)
+                        }
+                    })
+                    setDataBook(arr)
+                }else{
+                    setDataBook([])
+                }
+            })
+        }
     }
 
     useEffect(() => {
@@ -55,9 +60,9 @@ export default function Search() {
             </div>
             <div className="search-books-results">
                 <ol className="books-grid">
-                    {dataBook?.map((item, index) => {
+                    {dataBook?.length > 0 && dataSearch ? dataBook?.map((item, index) => {
                         return <Card key={index} item={item} changeBook={handleChangeBook} />
-                    })}
+                    }) : <p>There is no book</p>}
                 </ol>
             </div>
         </div>

@@ -33,9 +33,9 @@ export default function Home() {
                             <h2 className="bookshelf-title">Currently Reading</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    {dataAll?.map((item, index) => {
+                                    {dataAll?.map((item) => {
                                         if (item.shelf === "currentlyReading") {
-                                            return <Card key={index} item={item} changeBook={handleChangeBook} />
+                                            return <Card key={item.id} item={item} changeBook={handleChangeBook} />
                                         }
                                     })}
                                 </ol>
@@ -45,9 +45,9 @@ export default function Home() {
                             <h2 className="bookshelf-title">Want to Read</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    {dataAll?.map((item, index) => {
+                                    {dataAll?.map((item) => {
                                         if (item.shelf === "wantToRead") {
-                                            return <Card key={index} item={item} changeBook={handleChangeBook} />
+                                            return <Card key={item.id} item={item} changeBook={handleChangeBook} />
                                         }
                                     })}
                                 </ol>
@@ -57,9 +57,9 @@ export default function Home() {
                             <h2 className="bookshelf-title">Read</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    {dataAll?.map((item, index) => {
+                                    {dataAll?.map((item) => {
                                         if (item.shelf === "read") {
-                                            return <Card key={index} item={item} changeBook={handleChangeBook} />
+                                            return <Card key={item.id} item={item} changeBook={handleChangeBook} />
                                         }
                                     })}
                                 </ol>
